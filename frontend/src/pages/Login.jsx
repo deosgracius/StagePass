@@ -79,8 +79,9 @@ export default function Login() {
             </Link>
           </div>
         </form>
-        <div className="mt-6 text-[11px] text-center font-mono text-white/30">
-          Demo: demo@stagepass.app · demo1234
+        <div className="mt-6 text-[11px] text-center font-mono text-white/30 space-y-1">
+          <div>Demo customer: demo@stagepass.app · demo1234</div>
+          <div>Admin: admin@stagepass.app · admin1234</div>
         </div>
       </div>
     </main>

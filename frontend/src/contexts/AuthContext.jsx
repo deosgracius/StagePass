@@ -31,7 +31,7 @@ export function AuthProvider({ children }) {
       const { data } = await api.post("/auth/login", { email, password });
       localStorage.setItem("stagepass_token", data.token);
       setUser(data.user);
-      return { ok: true };
+      return { ok: true, user: data.user };
     } catch (e) {
       return { ok: false, error: formatApiErrorDetail(e.response?.data?.detail) || e.message };
     }
@@ -42,9 +42,19 @@ export function AuthProvider({ children }) {
       const { data } = await api.post("/auth/register", { name, email, password });
       localStorage.setItem("stagepass_token", data.token);
       setUser(data.user);
-      return { ok: true };
+      return { ok: true, user: data.user };
     } catch (e) {
       return { ok: false, error: formatApiErrorDetail(e.response?.data?.detail) || e.message };
+    }
+  };
+
+  const refreshUser = async () => {
+    try {
+      const { data } = await api.get("/auth/me");
+      setUser(data);
+      return data;
+    } catch {
+      return null;
     }
   };
 
@@ -54,7 +64,7 @@ export function AuthProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, register, logout, refreshUser }}>
       {children}
     </AuthContext.Provider>
   );

@@ -11,11 +11,16 @@ import Checkout from "@/pages/Checkout";
 import Login from "@/pages/Login";
 import Register from "@/pages/Register";
 import Dashboard from "@/pages/Dashboard";
+import Organize from "@/pages/Organize";
+import OrganizeNew from "@/pages/OrganizeNew";
+import OrganizeUpgrade from "@/pages/OrganizeUpgrade";
+import Admin from "@/pages/Admin";
 
-function Protected({ children }) {
+function Protected({ children, admin }) {
   const { user, loading } = useAuth();
   if (loading) return null;
   if (!user) return <Navigate to="/login" replace />;
+  if (admin && user.role !== "admin") return <Navigate to="/" replace />;
   return children;
 }
 
@@ -50,6 +55,38 @@ function AppShell() {
           element={
             <Protected>
               <Dashboard />
+            </Protected>
+          }
+        />
+        <Route
+          path="/organize"
+          element={
+            <Protected>
+              <Organize />
+            </Protected>
+          }
+        />
+        <Route
+          path="/organize/new"
+          element={
+            <Protected>
+              <OrganizeNew />
+            </Protected>
+          }
+        />
+        <Route
+          path="/organize/upgrade"
+          element={
+            <Protected>
+              <OrganizeUpgrade />
+            </Protected>
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            <Protected admin>
+              <Admin />
             </Protected>
           }
         />

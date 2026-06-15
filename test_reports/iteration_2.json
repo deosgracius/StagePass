@@ -1,0 +1,25 @@
+{
+  "summary": "Tiered host feature fully verified. Backend: 19/19 new pytest cases pass (plans, role/plan login, starter limits incl. 1-event cap + edit/delete 403 + venue-size 403, pro upgrade unlocks edit/delete + 5-event cap + 15x20 limit, platinum 20x25 ok, organizer event isolation, stats analytics gated by plan, admin users/events/feature toggle + non-admin 403, cancelled event filtered from public + booking 400). Frontend: demo login shows Host link & hides Admin; /organize renders Starter plan card with Upgrade CTA and empty My Events state; /organize/upgrade renders 3 plan cards with select-plan-{starter|pro|platinum} testids; non-admin /admin correctly redirects to /; admin login shows Admin link and /admin renders Events/Users tabs with Mark Featured toggles; /events lists 16 images, 0 broken.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": [
+    "/app/backend/tests/test_tiered_host.py",
+    "/app/backend/tests/test_stagepass_api.py",
+    "/app/test_reports/pytest/tiered_host_results.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "_validate_event_payload allows starter to submit only rows<=10 cols<=14, but Pydantic min for rows is 4 and tier rows assignment requires careful tier rows; consider auto-generating standard tier rows server-side to avoid client tier-row mismatch.",
+    "/api/auth/upgrade is a mock (no payment) per design; explicit note shown in UI ('Demo mode')—acceptable for MVP.",
+    "Admin 'Mark featured' was not click-tested end-to-end via UI (verified via backend PATCH instead). Main agent can self-verify.",
+    "server.py is now ~760 lines; consider splitting into routers/{auth,events,organize,admin,bookings}.py and models.py."
+  ],
+  "updated_files": ["/app/backend/tests/test_tiered_host.py"],
+  "success_rate": {"backend": "100% (19/19)", "frontend": "100% on flows tested"},
+  "test_credentials": "admin@stagepass.app/admin1234 and demo@stagepass.app/demo1234 - both verified",
+  "seed_data_creation": "Tests register fresh users prefixed test_<uuid>@stagepass.app and create TEST_<random>/TEST_mine/TEST_cancel_me events. Some test events remain in DB (visible in admin console).",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Use /app/backend/tests/test_tiered_host.py for regression of plan/role logic; existing /app/backend/tests/test_stagepass_api.py covers booking flow. Admin endpoints, plan limits (1/5/unlimited), venue size caps (10x14/15x20/25x30), can_edit/can_cancel, analytics gating, role auto-promotion on first event, and cancelled-event filtering all working. Frontend testids select-plan-{starter|pro|platinum}, admin-tab-{events|users} confirmed present.",
+  "rca of the issue": "N/A - all tests passed"
+}

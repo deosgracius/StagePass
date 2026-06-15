@@ -19,8 +19,12 @@ export default function Events() {
     setLoading(true);
     api
       .get("/events", { params: cat !== "all" ? { category: cat } : {} })
-      .then((r) => setEvents(r.data))
-      .finally(() => setLoading(false));
+      .then((r) => {
+        setEvents(r.data);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, [cat]);
 
   const sorted = useMemo(

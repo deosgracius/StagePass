@@ -45,6 +45,24 @@ export default function Navbar() {
               My Tickets
             </NavLink>
           )}
+          {user && (
+            <NavLink
+              to="/organize"
+              data-testid="nav-organize"
+              className={({ isActive }) => `${linkBase} ${isActive ? linkActive : linkInactive}`}
+            >
+              Host
+            </NavLink>
+          )}
+          {user?.role === "admin" && (
+            <NavLink
+              to="/admin"
+              data-testid="nav-admin"
+              className={({ isActive }) => `${linkBase} ${isActive ? linkActive : linkInactive}`}
+            >
+              Admin
+            </NavLink>
+          )}
         </nav>
 
         <div className="flex items-center gap-3">
@@ -52,6 +70,15 @@ export default function Navbar() {
             <>
               <span className="hidden sm:flex items-center gap-2 text-sm text-white/70 font-mono">
                 <User size={14} /> {user.name}
+                {user.plan && user.plan !== "starter" && (
+                  <span className="ml-1 text-[9px] uppercase tracking-widest px-1.5 py-0.5 border"
+                        style={{
+                          color: user.plan === "platinum" ? "#FF2E93" : "#00F0FF",
+                          borderColor: user.plan === "platinum" ? "#FF2E93" : "#00F0FF",
+                        }}>
+                    {user.plan}
+                  </span>
+                )}
               </span>
               <button
                 data-testid="logout-btn"

@@ -19,7 +19,9 @@ const MARQUEE = [
 export default function Landing() {
   const [events, setEvents] = useState([]);
   useEffect(() => {
-    api.get("/events").then((r) => setEvents(r.data)).catch(() => {});
+    api.get("/events").then((r) => {
+      setEvents(r.data);
+    }).catch(() => {});
   }, []);
 
   return (
