@@ -1,0 +1,139 @@
+{
+  "theme": "dark",
+  "archetype": "Cinematic Neon Luxury",
+  "typography": {
+    "fonts": {
+      "headings": "Cabinet Grotesk",
+      "body": "Outfit",
+      "mono": "JetBrains Mono"
+    },
+    "hierarchy": {
+      "h1": "text-5xl sm:text-6xl tracking-tighter font-black uppercase",
+      "h2": "text-3xl sm:text-4xl tracking-tight font-bold",
+      "h3": "text-2xl font-bold tracking-tight",
+      "h4": "text-sm uppercase tracking-[0.2em] font-medium text-white/50",
+      "body": "text-base leading-relaxed font-light text-white/80",
+      "mono_accent": "font-mono text-sm tracking-wider"
+    }
+  },
+  "colors": {
+    "background": {
+      "base": "#050505",
+      "surface": "rgba(255, 255, 255, 0.03)",
+      "surface_hover": "rgba(255, 255, 255, 0.08)"
+    },
+    "text": {
+      "primary": "#FFFFFF",
+      "secondary": "rgba(255, 255, 255, 0.6)",
+      "disabled": "rgba(255, 255, 255, 0.3)",
+      "on_primary": "#000000"
+    },
+    "brand": {
+      "primary": "#D3FF24",
+      "primary_hover": "#B8E614",
+      "accent": "#FF2E93",
+      "accent_secondary": "#00F0FF"
+    },
+    "seat_tiers": {
+      "vip": "#FF2E93",
+      "premium": "#00F0FF",
+      "standard": "#FFFFFF",
+      "selected": "#D3FF24",
+      "taken": "rgba(255, 255, 255, 0.1)"
+    },
+    "borders": {
+      "subtle": "rgba(255, 255, 255, 0.1)",
+      "neon_glow": "0 0 10px rgba(211, 255, 36, 0.5)"
+    }
+  },
+  "spacing_and_layout": {
+    "containers": "max-w-7xl mx-auto px-6 lg:px-12",
+    "bento_grid": "grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12",
+    "control_room_grid": "grid grid-cols-1 lg:grid-cols-4 gap-6",
+    "generous_padding": "py-24 sm:py-32"
+  },
+  "surfaces": {
+    "crystal_glass": {
+      "background": "bg-white/5",
+      "blur": "backdrop-blur-2xl",
+      "border": "border border-white/10",
+      "shadow": "shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
+    },
+    "neon_outline": {
+      "border": "border border-[#D3FF24]/50",
+      "glow": "drop-shadow-[0_0_8px_rgba(211,255,36,0.3)]"
+    },
+    "solid_matte": {
+      "background": "bg-[#0A0A0C]",
+      "border": "border border-white/5"
+    }
+  },
+  "components": {
+    "button_primary": "bg-[#D3FF24] text-black font-bold uppercase tracking-widest px-8 py-4 rounded-none hover:bg-[#B8E614] hover:shadow-[0_0_20px_rgba(211,255,36,0.4)] transition-all flex items-center justify-center data-testid=\"primary-cta\"",
+    "button_secondary": "bg-transparent border border-white/20 text-white hover:border-white/50 px-8 py-4 uppercase tracking-widest font-mono text-sm transition-all data-testid=\"secondary-cta\"",
+    "card": "bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-2xl hover:border-white/20 transition-all data-testid=\"event-card\"",
+    "input": "bg-black/50 border border-white/10 text-white px-4 py-4 focus:border-[#D3FF24] focus:ring-1 focus:ring-[#D3FF24] transition-all rounded-lg placeholder-white/30 font-mono text-sm data-testid=\"form-input\""
+  },
+  "motion_and_3d": {
+    "transitions": {
+      "default": "transition-all duration-300 ease-out",
+      "slow": "transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]"
+    },
+    "hover_effects": "-translate-y-2 shadow-2xl",
+    "3d_moments": [
+      "Hero section: Use React Three Fiber (R3F) for floating abstract glowing tickets or geometric sound-waves reflecting the neon colors (#D3FF24, #FF2E93). Add mouse-tracking parallax.",
+      "Seat Map: Use a 3D isometric or tilted 2.5D view (via R3F or Spline). Interactive hover on seats zooms in and highlights the seat using post-processing (Bloom effect).",
+      "Event Details: Include subtle 3D tilt (Framer Motion) on the main event poster."
+    ]
+  },
+  "pages": {
+    "landing": {
+      "hero": "Full viewport height. Dark cinematic background image + heavy dark overlay (bg-black/60). Big Cabinet Grotesk typography. 3D abstract object floating. Primary neon CTA.",
+      "featured_events": "Bento grid layout. Glassmorphism cards. High contrast event dates in JetBrains Mono overlaying luxury imagery.",
+      "categories": "Asymmetric layout with overlapping images and text."
+    },
+    "event_detail": {
+      "layout": "Split layout: Left side sticky with massive event title, date, and CTA. Right side scrollable with descriptions, performer details, and images.",
+      "info_blocks": "Grid of info boxes (Date, Venue, Price) using Neon Outline surface.",
+      "cta_bar": "Sticky bottom bar on mobile, inline on desktop. Strong neon glow effect."
+    },
+    "seat_selection": {
+      "layout": "Control Room Grid. Left side (col-span-3): 3D or high-fidelity 2D Seat Map. Right side (col-span-1): Booking summary, tier legend, and checkout trigger.",
+      "seat_states": "Available (grey outline), Selected (Neon Yellow fill + glow), Taken (Dark grey, disabled), VIP/Premium (Pink/Cyan outlines)."
+    },
+    "checkout": {
+      "layout": "Narrow centered column for high focus. Crystal Glass surface for the main form.",
+      "inputs": "Floating labels, dark inputs with neon focus states."
+    },
+    "dashboard": {
+      "layout": "Sidebar navigation. Main area uses Grid Borders for a technical, premium ledger feel. Ticket list styled as perforated digital tickets with QR codes."
+    }
+  },
+  "image_urls": {
+    "hero_concert": {
+      "url": "https://images.pexels.com/photos/26447525/pexels-photo-26447525.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "description": "Energetic crowd night concert dramatic lighting"
+    },
+    "hero_theater": {
+      "url": "https://images.unsplash.com/photo-1562329265-95a6d7a83440?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzNzl8MHwxfHNlYXJjaHwzfHxsdXh1cnklMjB0aGVhdGVyJTIwc3RhZ2V8ZW58MHx8fHwxNzgxNTI3Njk5fDA&ixlib=rb-4.1.0&q=85",
+      "description": "Red curtain stage luxury theater"
+    },
+    "event_stadium": {
+      "url": "https://images.pexels.com/photos/32471032/pexels-photo-32471032.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "description": "Stadium floodlights night"
+    },
+    "event_club": {
+      "url": "https://images.pexels.com/photos/3696396/pexels-photo-3696396.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "description": "Thrilled people live concert club"
+    }
+  },
+  "instructions_to_main_agent": [
+    "CRITICAL: All interactive elements must have semantic data-testid attributes (e.g., data-testid='book-now-btn').",
+    "Use @react-three/fiber and @react-three/drei for the 3D moments (hero floating elements, 3D seat representation).",
+    "Ensure high contrast: The text color on #D3FF24 (Electric Lime) must be Black (#000000).",
+    "Do NOT use pure #000000 for backgrounds. Use #050505.",
+    "Do not use generic fonts like Inter or Roboto. Use Cabinet Grotesk (headings), Outfit (body), JetBrains Mono (data/numbers).",
+    "Use framer-motion for page transitions and micro-interactions on seat selection.",
+    "Do not use generic Shadcn cards for marketing landing pages. Custom build them with Tailwind glassmorphism."
+  ]
+}
