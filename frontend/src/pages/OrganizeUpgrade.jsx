@@ -40,7 +40,12 @@ export default function OrganizeUpgrade() {
         plan: planKey,
         origin_url: window.location.origin,
       });
-      window.location.href = data.url;
+      // Stripe denies iframe embedding — break out of the preview iframe.
+      try {
+        window.top.location.href = data.url;
+      } catch {
+        window.open(data.url, "_blank", "noopener,noreferrer");
+      }
     } catch (e) {
       toast.error(formatApiErrorDetail(e.response?.data?.detail) || e.message);
       setBusy(null);

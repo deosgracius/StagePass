@@ -56,8 +56,13 @@ export default function SeatSelection() {
         navigate(data.url);
         return;
       }
-      // Otherwise redirect to Stripe checkout
-      window.location.href = data.url;
+      // Stripe sends X-Frame-Options: DENY — navigate the TOP window so we
+      // escape the Emergent preview iframe, otherwise the page goes blank.
+      try {
+        window.top.location.href = data.url;
+      } catch {
+        window.open(data.url, "_blank", "noopener,noreferrer");
+      }
     } catch (e) {
       toast.error(formatApiErrorDetail(e.response?.data?.detail) || e.message);
       setSubmitting(false);
