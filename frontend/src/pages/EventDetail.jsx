@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Calendar, Clock, MapPin, Mic2, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
-import { api } from "../lib/api";
+import { api, resolveImageUrl } from "../lib/api";
 
 function formatDateTime(iso) {
   try {
@@ -44,7 +44,7 @@ export default function EventDetail() {
       {/* Hero */}
       <section className="relative h-[70vh] overflow-hidden">
         <img
-          src={event.image_url}
+          src={resolveImageUrl(event.image_url)}
           alt={event.title}
           className="absolute inset-0 w-full h-full object-cover"
         />

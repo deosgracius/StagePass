@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Plus, BarChart3, Crown, Lock, Eye, Sparkles } from "lucide-react";
+import { Plus, BarChart3, Crown, Lock, Eye, Sparkles, Pencil } from "lucide-react";
 import { api } from "../lib/api";
 import { useAuth } from "../contexts/AuthContext";
 
@@ -212,6 +212,13 @@ function OrganizerEventCard({ event, planAccent, canAnalytics }) {
         className="font-mono text-[10px] uppercase tracking-widest text-white/60 hover:text-[#D3FF24] inline-flex items-center gap-1.5"
       >
         <Eye size={12} /> View public page →
+      </Link>
+      <Link
+        to={`/organize/events/${event.id}/edit`}
+        data-testid={`edit-${event.id}`}
+        className="font-mono text-[10px] uppercase tracking-widest text-white/60 hover:text-[#00F0FF] inline-flex items-center gap-1.5 mt-2"
+      >
+        <Pencil size={12} /> Edit event →
       </Link>
     </div>
   );

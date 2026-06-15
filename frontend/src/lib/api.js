@@ -25,3 +25,11 @@ export function formatApiErrorDetail(detail) {
   if (detail && typeof detail.msg === "string") return detail.msg;
   return String(detail);
 }
+
+/** Convert a possibly-relative upload URL into an absolute one. */
+export function resolveImageUrl(url) {
+  if (!url) return "";
+  if (url.startsWith("http")) return url;
+  if (url.startsWith("/")) return `${BACKEND_URL}${url}`;
+  return url;
+}

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Star, Users, Calendar } from "lucide-react";
-import { api, formatApiErrorDetail } from "../lib/api";
+import { api, formatApiErrorDetail, resolveImageUrl } from "../lib/api";
 
 export default function Admin() {
   const [tab, setTab] = useState("events");
@@ -72,7 +72,7 @@ export default function Admin() {
               className="glass p-5 flex flex-wrap items-center gap-4"
               style={{ borderRadius: "16px" }}
             >
-              <img src={ev.image_url} alt="" className="w-20 h-20 object-cover rounded-lg" />
+              <img src={resolveImageUrl(ev.image_url)} alt="" className="w-20 h-20 object-cover rounded-lg" />
               <div className="flex-1 min-w-[200px]">
                 <div className="font-display text-lg">{ev.title}</div>
                 <div className="font-mono text-[10px] uppercase tracking-widest text-white/40 mt-1">

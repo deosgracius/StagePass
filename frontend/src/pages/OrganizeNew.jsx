@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import { ArrowRight } from "lucide-react";
 import { api, formatApiErrorDetail } from "../lib/api";
 import { useAuth } from "../contexts/AuthContext";
+import ImageUploader from "../components/ImageUploader";
 
 const DEFAULT_TIERS = [
   { key: "vip", label: "VIP", price: 200, rows: [0, 1] },
@@ -190,18 +191,12 @@ export default function OrganizeNew() {
                 required
               />
             </Field>
-            <Field label="Cover image URL" full>
-              <input
+            <Field label="Cover image" full>
+              <ImageUploader
                 value={form.image_url}
-                onChange={(e) => update("image_url", e.target.value)}
-                data-testid="field-image"
-                className={inputCls}
-                placeholder="https://images.unsplash.com/..."
-                required
+                onChange={(v) => update("image_url", v)}
+                testId="new-image"
               />
-              <div className="text-[10px] text-white/30 font-mono mt-1.5">
-                Paste any direct image URL. Square or landscape works best.
-              </div>
             </Field>
           </Grid>
         </Section>

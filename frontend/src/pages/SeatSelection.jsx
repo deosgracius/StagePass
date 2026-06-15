@@ -45,12 +45,21 @@ export default function SeatSelection() {
     }
     setSubmitting(true);
     try {
-      const { data } = await api.post("/bookings", { event_id: id, seats: selected });
-      toast.success("Seats reserved!");
-      navigate(`/checkout/${data.id}`);
+      const { data } = await api.post("/payments/checkout/booking", {
+        event_id: id,
+        seats: selected,
+        origin_url: window.location.origin,
+      });
+      // Free events come back with a direct /checkout/{id} url
+      if (data.url.startsWith("/checkout/")) {
+        toast.success("Seats reserved!");
+        navigate(data.url);
+        return;
+      }
+      // Otherwise redirect to Stripe checkout
+      window.location.href = data.url;
     } catch (e) {
       toast.error(formatApiErrorDetail(e.response?.data?.detail) || e.message);
-    } finally {
       setSubmitting(false);
     }
   };
@@ -164,11 +173,11 @@ export default function SeatSelection() {
               data-testid="confirm-booking-btn"
               className="w-full bg-[#D3FF24] text-black font-mono uppercase tracking-[0.18em] text-xs px-6 py-4 hover:bg-white transition-all neon-glow inline-flex items-center justify-center gap-3 disabled:opacity-40 disabled:cursor-not-allowed disabled:bg-white/10 disabled:text-white/40 disabled:shadow-none"
             >
-              {submitting ? "Reserving…" : "Confirm & continue"}
+              {submitting ? "Redirecting…" : "Pay & confirm seats"}
               {!submitting && <ArrowRight size={16} />}
             </button>
             <div className="text-[10px] text-center text-white/30 font-mono uppercase tracking-widest">
-              Seats locked instantly · pay next
+              Seats locked for 15 min · secure Stripe checkout
             </div>
           </div>
         </aside>

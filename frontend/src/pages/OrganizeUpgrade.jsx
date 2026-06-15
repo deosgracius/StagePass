@@ -28,13 +28,21 @@ export default function OrganizeUpgrade() {
     }
     setBusy(planKey);
     try {
-      await api.post("/auth/upgrade", { plan: planKey });
-      await refreshUser();
-      toast.success(`Upgraded to ${planKey}`);
-      navigate("/organize");
+      if (planKey === "starter") {
+        // Downgrade is free — keep mock endpoint for now
+        await api.post("/auth/upgrade", { plan: planKey });
+        await refreshUser();
+        toast.success("Switched to starter");
+        navigate("/organize");
+        return;
+      }
+      const { data } = await api.post("/payments/checkout/plan", {
+        plan: planKey,
+        origin_url: window.location.origin,
+      });
+      window.location.href = data.url;
     } catch (e) {
       toast.error(formatApiErrorDetail(e.response?.data?.detail) || e.message);
-    } finally {
       setBusy(null);
     }
   };
@@ -130,7 +138,7 @@ export default function OrganizeUpgrade() {
       </div>
 
       <div className="text-center mt-12 text-[11px] text-white/30 font-mono uppercase tracking-widest">
-        Demo mode · upgrade is instant, no payment required
+        Secure checkout via Stripe · cancel anytime
       </div>
     </main>
   );

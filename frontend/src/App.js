@@ -15,6 +15,8 @@ import Organize from "@/pages/Organize";
 import OrganizeNew from "@/pages/OrganizeNew";
 import OrganizeUpgrade from "@/pages/OrganizeUpgrade";
 import Admin from "@/pages/Admin";
+import EventEdit from "@/pages/EventEdit";
+import PaymentReturn from "@/pages/PaymentReturn";
 
 function Protected({ children, admin }) {
   const { user, loading } = useAuth();
@@ -79,6 +81,22 @@ function AppShell() {
           element={
             <Protected>
               <OrganizeUpgrade />
+            </Protected>
+          }
+        />
+        <Route
+          path="/organize/events/:id/edit"
+          element={
+            <Protected>
+              <EventEdit />
+            </Protected>
+          }
+        />
+        <Route
+          path="/payment-return"
+          element={
+            <Protected>
+              <PaymentReturn />
             </Protected>
           }
         />

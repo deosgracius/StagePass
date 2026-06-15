@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Calendar, MapPin, ArrowUpRight } from "lucide-react";
+import { resolveImageUrl } from "../lib/api";
 
 function formatDate(iso) {
   try {
@@ -32,7 +33,7 @@ export default function EventCard({ event, index = 0 }) {
     >
       <div className="relative aspect-[4/5] overflow-hidden">
         <img
-          src={event.image_url}
+          src={resolveImageUrl(event.image_url)}
           alt={event.title}
           loading="lazy"
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
