@@ -1006,3 +1006,23 @@ async def _sweep_expired_holds():
 @app.on_event("shutdown")
 async def on_shutdown():
     client.close()
+
+
+# ---- Serve the built React frontend (production) ----------------------------
+# Registered after the /api router so API routes always take precedence; any
+# unknown non-/api GET path falls back to index.html for client-side routing.
+from starlette.responses import PlainTextResponse as _PlainTextResponse
+
+_FRONTEND_DIR = Path(os.environ.get("FRONTEND_BUILD_DIR", str(Path(__file__).parent / "frontend_build")))
+if _FRONTEND_DIR.is_dir():
+
+    @app.get("/{full_path:path}", include_in_schema=False)
+    async def serve_frontend(full_path: str):
+        if full_path.startswith("api"):
+            return _PlainTextResponse("Not Found", status_code=404)
+        candidate = _FRONTEND_DIR / full_path
+        if full_path and candidate.is_file():
+            return FileResponse(str(candidate))
+        return FileResponse(str(_FRONTEND_DIR / "index.html"))
+
+    logger.info("Serving frontend build from %s", _FRONTEND_DIR)

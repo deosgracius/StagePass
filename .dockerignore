@@ -1,0 +1,8 @@
+**/node_modules
+**/build
+**/__pycache__
+**/*.pyc
+.git
+backend/uploads
+backend/tests
+*.md

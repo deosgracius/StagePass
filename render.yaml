@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: stagepass
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: DB_NAME
+        value: stagepass
+      - key: CORS_ORIGINS
+        value: "*"
+      - key: JWT_SECRET
+        generateValue: true
+      - key: MONGO_URL
+        sync: false
+      - key: STRIPE_API_KEY
+        sync: false
