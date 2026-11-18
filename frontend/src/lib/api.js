@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+// Default to same-origin ("") when REACT_APP_BACKEND_URL is unset, so API calls
+// go to a relative /api path (the backend serves this frontend from the same host).
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "";
 export const API = `${BACKEND_URL}/api`;
 
 export const api = axios.create({ baseURL: API });
