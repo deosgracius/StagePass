@@ -1,9 +1,9 @@
 # ---- Stage 1: build the React frontend (CRA + craco) ----
-FROM node:18-bullseye AS frontend
+FROM node:22-bullseye AS frontend
 WORKDIR /fe
 ENV CI=false
 COPY frontend/package.json ./
-RUN yarn install --network-timeout 600000
+RUN yarn install --ignore-engines --network-timeout 600000
 COPY frontend/ ./
 RUN yarn build
 
@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       gcc g++ make autoconf automake libtool python3-dev libffi-dev \
     && rm -rf /var/lib/apt/lists/*
 COPY backend/requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir --extra-index-url https://d33sy5i8bnduwe.cloudfront.net/simple/ -r requirements.txt
 COPY backend/ ./
 COPY --from=frontend /fe/build ./frontend_build
 ENV FRONTEND_BUILD_DIR=/app/frontend_build
